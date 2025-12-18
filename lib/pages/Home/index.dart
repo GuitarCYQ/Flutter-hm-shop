@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hm_shop/api/home.dart';
 import 'package:hm_shop/components/Home/HmCategory.dart';
 import 'package:hm_shop/components/Home/HmHot.dart';
 import 'package:hm_shop/components/Home/HmMoreList.dart';
@@ -17,18 +18,18 @@ class _HomeViewState extends State<HomeView> {
 
   // 存放轮播图
   final List<BannerItem> _bannerList = [
-    BannerItem(
-      id: '1', 
-      imgUrl: 'https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/meituan/1.jpg'
-    ),
-    BannerItem(
-      id: '2', 
-      imgUrl: 'https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/meituan/2.png'
-    ),
-    BannerItem(
-      id: '3', 
-      imgUrl: 'https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/meituan/3.jpg'
-    ),
+    // BannerItem(
+    //   id: '1', 
+    //   imgUrl: 'https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/meituan/1.jpg'
+    // ),
+    // BannerItem(
+    //   id: '2', 
+    //   imgUrl: 'https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/meituan/2.png'
+    // ),
+    // BannerItem(
+    //   id: '3', 
+    //   imgUrl: 'https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/meituan/3.jpg'
+    // ),
   ];
 
   // 获取滚动容器的内容
@@ -68,11 +69,21 @@ class _HomeViewState extends State<HomeView> {
       // 间隙 有一个10px的间隙
       SliverToBoxAdapter(child: SizedBox(height: 10)),
 
-
-
       // 无限滚动列表
       HmMoreList(), 
     ];
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _getBannerList();
+  }
+
+  void _getBannerList() async {
+    _bannerList.addAll(await getBannerListAPI());
+    setState(() {});
   }
 
   @override
