@@ -11,7 +11,7 @@ class HmSlider extends StatefulWidget {
 }
 
 class _HmSliderState extends State<HmSlider> {
-  CarouselSliderController _controller =
+  final CarouselSliderController _controller =
       CarouselSliderController(); // 控制轮播图跳转控制器
   int _currentIndex = 0;
 
@@ -116,3 +116,7 @@ class _HmSliderState extends State<HmSlider> {
     return Stack(children: [_getSlider(), _getSearch(), _getDots()]);
   }
 }
+
+
+// https://meikou-api.itheima.net
+// /home/banner
