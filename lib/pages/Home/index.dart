@@ -16,20 +16,9 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   // 轮播图数据
-  List<BannerItem> _bannerList = [
-    // BannerItem(
-    //   id: '1',
-    //   imgUrl: 'https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/meituan/1.jpg',
-    // ),
-    // BannerItem(
-    //   id: '2',
-    //   imgUrl: 'https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/meituan/2.png',
-    // ),
-    // BannerItem(
-    //   id: '3',
-    //   imgUrl: 'https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/meituan/3.jpg',
-    // ),
-  ];
+  List<BannerItem> _bannerList = [];
+  // 分类数据
+  List<CategoryItem> _categoryList = [];
 
   List<Widget> _getScrollChildren() {
     return [
@@ -40,7 +29,7 @@ class _HomeViewState extends State<HomeView> {
       SliverToBoxAdapter(child: SizedBox(height: 10)),
 
       // 分类组件
-      SliverToBoxAdapter(child: HmCategory()),
+      SliverToBoxAdapter(child: HmCategory(categoryList: _categoryList)),
       // 间隔
       SliverToBoxAdapter(child: SizedBox(height: 10)),
 
@@ -74,12 +63,21 @@ class _HomeViewState extends State<HomeView> {
   @override
   void initState() {
     super.initState();
+    // 初始化轮播图数据
     _getBannerList();
+    // 初始化分类数据
+    _getCategoryList();
   }
 
   // 调用api/home里的getBannerListAPI方法，获取轮播图数据
   void _getBannerList() async {
     _bannerList = await getBannerListAPI();
+    setState(() {});
+  }
+
+  // 调用api/home里的getCategoryListAPI方法，获取分类数据
+  void _getCategoryList() async {
+    _categoryList = await getCategoryListAPI();
     setState(() {});
   }
 
