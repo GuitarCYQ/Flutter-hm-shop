@@ -23,3 +23,10 @@ Future<List<CategoryItem>> getCategoryListAPI() async {
     return CategoryItem.formJSON(item as Map<String, dynamic>);
   }).toList();
 }
+
+// 获取特惠推荐列表 
+// 这里直接使用SpecialRecemmendResult结构，是因为在viewmodels/home.dart中SpecialRecemmendResult才是最终的结果，直接使用它就行
+Future<SpecialRecemmendResult> getProductListAPI() async {
+  // 返回请求
+  return SpecialRecemmendResult.formJSON(await dioRequest.get(HttpConstants.PRODUCT_LIST, {}));
+}

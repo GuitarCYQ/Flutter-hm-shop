@@ -16,23 +16,23 @@ class _MainPageState extends State<MainPage> {
   // 一般应用程序的导航是固定不变的
   final List<Map<String, String>> _tabList = [
     {
-      "icon": 'lib/assets/index.png',
-      "active_icon": 'lib/assets/index-select.png',
+      "icon": 'lib/assets/ic_public_home_normal.png',
+      "active_icon": 'lib/assets/ic_public_home_active.png',
       'title': '首页',
     },
     {
-      "icon": 'lib/assets/list.png',
-      "active_icon": 'lib/assets/list-select.png',
+      "icon": 'lib/assets/ic_public_pro_normal.png',
+      "active_icon": 'lib/assets/ic_public_pro_active.png',
       'title': '分类',
     },
     {
-      "icon": 'lib/assets/shop.png',
-      "active_icon": 'lib/assets/shop-select.png',
+      "icon": 'lib/assets/ic_public_cart_normal.png',
+      "active_icon": 'lib/assets/ic_public_cart_active.png',
       'title': '购物车',
     },
     {
-      "icon": 'lib/assets/user.png',
-      "active_icon": 'lib/assets/user-select.png',
+      "icon": 'lib/assets/ic_public_my_normal.png',
+      "active_icon": 'lib/assets/ic_public_my_active.png',
       'title': '我的',
     },
   ];
