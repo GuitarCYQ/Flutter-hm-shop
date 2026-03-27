@@ -12,10 +12,14 @@ class GlobalConstants {
 class HttpConstants {
   // 轮播图
   static const String BANNER_LIST = '/home/banner';
-
   // 分类
   static const String CATEGORY_LIST = '/home/category/head';
-
   // 特惠推荐
   static const String PRODUCT_LIST = '/hot/preference';
+  // 爆款推荐
+  static const String INVOGUE_LIST = '/hot/inVogue';
+  // 一站买全
+  static const String ONESTOP_LIST = '/hot/oneStop';
+  // 推荐列表
+  static const String RECOMMEND_LIST = '/home/recommend';
 }

@@ -42,7 +42,6 @@ class CategoryItem {
   }
 }
 
-
 // 特惠推荐 - 商品项
 class GoodsItem {
   String id;
@@ -103,16 +102,14 @@ class SubType {
   String id;
   String title;
   GoodsItems goodsItems;
-  SubType({
-    required this.id,
-    required this.title,
-    required this.goodsItems,
-  });
+  SubType({required this.id, required this.title, required this.goodsItems});
   factory SubType.formJSON(Map<String, dynamic> json) {
     return SubType(
       id: json['id'] ?? '',
       title: json['title'] ?? '',
-      goodsItems: GoodsItems.formJSON(json['goodsItems'] as Map<String, dynamic>),
+      goodsItems: GoodsItems.formJSON(
+        json['goodsItems'] as Map<String, dynamic>,
+      ),
     );
   }
 }
@@ -134,6 +131,32 @@ class SpecialRecemmendResult {
       subTypes: (json['subTypes'] as List? ?? [])
           .map((item) => SubType.formJSON(item as Map<String, dynamic>))
           .toList(),
+    );
+  }
+}
+
+// 推荐类型
+class GoodDetailItem extends GoodsItem {
+  int payCount = 0;
+
+  // 商品详情项
+  GoodDetailItem({
+    required super.id,
+    required super.name,
+    required super.price,
+    required super.picture,
+    required super.orderNum,
+    required this.payCount,
+  }) : super(desc: '');
+  // 转化方法
+  factory GoodDetailItem.formJSON(Map<String, dynamic> json) {
+    return GoodDetailItem(
+      id: json['id']?.toString() ?? '',
+      name: json['name']?.toString() ?? '',
+      price: json['price']?.toString() ?? '',
+      picture: json['picture']?.toString() ?? '',
+      orderNum: int.tryParse(json['orderNum']?.toString() ?? '0') ?? 0,
+      payCount: int.tryParse(json['payCount']?.toString() ?? '0') ?? 0,
     );
   }
 }

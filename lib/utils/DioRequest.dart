@@ -44,7 +44,7 @@ class DioRequest {
   }
 
   // 封装get请求
-  Future<dynamic> get(String url, Map<String, dynamic>? params) {
+  Future<dynamic> get(String url, {Map<String, dynamic>? params}) {
     // 传参给_handleResponse()进一步处理返回的数据
     return _handleResponse(_dio.get(url, queryParameters: params));
   }
