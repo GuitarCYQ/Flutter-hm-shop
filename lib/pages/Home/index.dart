@@ -203,6 +203,7 @@ class _HomeViewState extends State<HomeView> {
   final GlobalKey<RefreshIndicatorState> _key =
       GlobalKey<RefreshIndicatorState>();
 
+  // 下拉刷新padding
   double _paddingTop = 0;
 
   @override

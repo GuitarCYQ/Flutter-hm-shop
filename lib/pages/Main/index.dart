@@ -38,7 +38,7 @@ class _MainPageState extends State<MainPage> {
   ];
 
   // 底部导航选中的索引
-  int _currentIndex = 0;
+  int _currentIndex = 3;
 
   // 返回底部渲染的4个分类
   List<BottomNavigationBarItem> _getTabBarWIdget() {
