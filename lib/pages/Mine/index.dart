@@ -36,9 +36,15 @@ class _MineViewState extends State<MineView> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  '立即登录',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                GestureDetector(
+                  onTap: () {
+                    // 点击登录
+                    Navigator.pushNamed(context, '/login');
+                  },
+                  child: Text(
+                    '立即登录',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                  ),
                 ),
               ],
             ),
@@ -205,6 +211,7 @@ class _MineViewState extends State<MineView> {
     _params['page']++; // 针对页码++
   }
 
+  // 触底加载方法
   final ScrollController _controller = ScrollController();
   void _registerEvent() {
     _controller.addListener(() {

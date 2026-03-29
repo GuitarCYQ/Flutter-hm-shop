@@ -191,3 +191,5 @@ class GoodsDetailsItems {
     );
   }
 }
+
+
