@@ -3,8 +3,10 @@ import 'package:get/get.dart';
 import 'package:hm_shop/api/mine.dart';
 import 'package:hm_shop/components/Home/HmMoreList.dart';
 import 'package:hm_shop/components/Main/HmGuess.dart';
+import 'package:hm_shop/stores/TokenManager.dart';
 import 'package:hm_shop/stores/UserController.dart';
 import 'package:hm_shop/viewmodels/home.dart';
+import 'package:hm_shop/viewmodels/user.dart';
 
 class MineView extends StatefulWidget {
   const MineView({super.key});
@@ -16,6 +18,50 @@ class MineView extends StatefulWidget {
 class _MineViewState extends State<MineView> {
   // 把这个控制器放在这里 这样就能在这个页面的任何地方使用共享数据了
   final UserController _userController = Get.find();
+
+  // 退出
+  Widget _getLogout() {
+    return _userController.user.value.id.isNotEmpty
+        ? Expanded(
+            child: GestureDetector(
+              onTap: () {
+                // 弹出确认提示框
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: Text('提示'),
+                      content: Text('确定要退出登录吗？'),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context); // 关闭对话框
+                          },
+                          child: Text('取消'),
+                        ),
+                        TextButton(
+                          onPressed: () async {
+                            // 删除token
+                            await tokenManage.removeToken();
+                            // 删除全局状态Getx，就是构建一个符合UserInfo类型的空的数据给updateUserInfo()方法，他就会
+                            _userController.updateUserInfo(
+                              UserInfo.fromJSON({}),
+                            );
+
+                            Navigator.pop(context); // 关闭对话框
+                          },
+                          child: Text('确认'),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+              child: Text('退出', textAlign: TextAlign.end),
+            ),
+          )
+        : Text('');
+  }
 
   Widget _buildHeader() {
     return Container(
@@ -69,6 +115,8 @@ class _MineViewState extends State<MineView> {
               ],
             ),
           ),
+          // 退出
+          Obx(() => _getLogout()),
         ],
       ),
     );

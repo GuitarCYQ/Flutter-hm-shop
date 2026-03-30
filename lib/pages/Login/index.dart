@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:hm_shop/api/user.dart';
 import 'package:hm_shop/stores/TokenManager.dart';
 import 'package:hm_shop/stores/UserController.dart';
+import 'package:hm_shop/utils/LoadingDialog.dart';
 import 'package:hm_shop/utils/Toastutils.dart';
 
 class LoginPage extends StatefulWidget {
@@ -21,6 +22,7 @@ class _LoginPageState extends State<LoginPage> {
 
   final UserController _userController = Get.find(); // 获取用户控制器实例
 
+  // 构建头部
   Widget _buildHeader() {
     return Row(
       children: [
@@ -135,6 +137,7 @@ class _LoginPageState extends State<LoginPage> {
 
   // 登录方法
   _login() async {
+    Loadingdialog.show(context, message: '努力登录中...'); // 显示加载框
     try {
       // 调用登录接口
       final res = await loginAPI({
@@ -144,9 +147,11 @@ class _LoginPageState extends State<LoginPage> {
       // 只要代码过了await这一步，就说明他已经登陆成功了,没成功会到trycatch这一步
       _userController.updateUserInfo(res); // 更新用户信息到全局状态，不能持久，刷新就没
       tokenManage.setToken(res.token); // 持久化token
+      Loadingdialog.hide(context); // 隐藏加载框
       ToastUtils.showToast(context, '登陆成功');
       Navigator.pop(context); // 登录成功后返回上一页
     } catch (e) {
+      Loadingdialog.hide(context); // 隐藏加载框
       ToastUtils.showToast(context, (e as DioException).message);
     }
   }
