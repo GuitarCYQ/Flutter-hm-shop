@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:hm_shop/api/user.dart';
 import 'package:hm_shop/pages/Cart/index.dart';
 import 'package:hm_shop/pages/Category/index.dart';
 import 'package:hm_shop/pages/Home/index.dart';
 import 'package:hm_shop/pages/Mine/index.dart';
+import 'package:hm_shop/stores/TokenManager.dart';
+import 'package:hm_shop/stores/UserController.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -12,6 +16,22 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  @override
+  void initState() {
+    super.initState();
+    // 初始化用户方法
+    _initUser();
+  }
+
+  final UserController _userController = Get.put(UserController());
+  _initUser() async {
+    await tokenManage.init(); // 初始化token
+    // 获取持久化里的token，有的话才调用获取用户信息的api
+    if (tokenManage.getToken().isNotEmpty) {
+      _userController.updateUserInfo(await getUserInfoAPI());
+    }
+  }
+
   // 定义数据 根据数据进渲染4个导航
   // 一般应用程序的导航是固定不变的
   final List<Map<String, String>> _tabList = [

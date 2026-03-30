@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hm_shop/api/user.dart';
+import 'package:hm_shop/stores/TokenManager.dart';
 import 'package:hm_shop/stores/UserController.dart';
 import 'package:hm_shop/utils/Toastutils.dart';
 
@@ -141,7 +142,8 @@ class _LoginPageState extends State<LoginPage> {
         'password': _passwordController.text,
       });
       // 只要代码过了await这一步，就说明他已经登陆成功了,没成功会到trycatch这一步
-      _userController.updateUserInfo(res); // 更新用户信息到全局状态
+      _userController.updateUserInfo(res); // 更新用户信息到全局状态，不能持久，刷新就没
+      tokenManage.setToken(res.token); // 持久化token
       ToastUtils.showToast(context, '登陆成功');
       Navigator.pop(context); // 登录成功后返回上一页
     } catch (e) {

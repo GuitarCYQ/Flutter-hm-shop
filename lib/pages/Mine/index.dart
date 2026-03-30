@@ -15,7 +15,7 @@ class MineView extends StatefulWidget {
 
 class _MineViewState extends State<MineView> {
   // 把这个控制器放在这里 这样就能在这个页面的任何地方使用共享数据了
-  final UserController _userController = Get.put(UserController());
+  final UserController _userController = Get.find();
 
   Widget _buildHeader() {
     return Container(
